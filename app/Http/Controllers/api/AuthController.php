@@ -24,8 +24,11 @@ class AuthController extends Controller
         $user = User::create($validatedData);
         $accessToken = $user->createToken('authToken')->accessToken;
         return json_encode([
-            'user' => $user, 
-            'access_token' => $accessToken
+            'data'=>[
+                'user' => $user,
+                'access_token' => $accessToken
+            ],
+            'message'=>'successfully retrieved'
         ]);
     }
     /**
@@ -44,7 +47,14 @@ class AuthController extends Controller
         }
 
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
-        return json_encode(['user' => auth()->user(), 'access_token' => $accessToken]);
+        //return json_encode(['user' => auth()->user(), 'access_token' => $accessToken]);
+        return json_encode([
+            'data'=>[
+                'user' => auth()->user(),
+                'access_token' => $accessToken
+            ],
+            'message'=>'successfully retrieved'
+        ]);
 
     }
     /**
