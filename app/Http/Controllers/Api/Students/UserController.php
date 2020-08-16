@@ -15,7 +15,7 @@ class UserController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'student_id' => 'required|max:13',
+            'student_id' => 'required|max:13|unique:users',
             'name' => 'required|max:55',
             'department' => 'required',
             'batch' => 'required',
@@ -28,7 +28,7 @@ class UserController extends Controller
         if($validator->fails()){
             return response()->json([
                 'message'=>'Validation Failed',
-                'errors'=>$validator->errors(),
+                'errors'=>$validator->errors()->all(),
                 'data'=>$request->input(),
             ]);
         }
