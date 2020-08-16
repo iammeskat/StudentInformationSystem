@@ -29,6 +29,7 @@ class UserController extends Controller
             return response()->json([
                 'message'=>'Validation Failed',
                 'errors'=>$validator->errors(),
+                'data'=>$request->input(),
             ]);
         }
         
