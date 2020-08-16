@@ -10,7 +10,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         
-        
+        #demo
         $validatedData = $request->validate([
         	'student_id' => 'required|max:13',
             'name' => 'required|max:55',
