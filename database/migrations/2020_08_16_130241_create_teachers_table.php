@@ -23,7 +23,7 @@ class CreateTeachersTable extends Migration
             $table->tinyInteger('email_verified')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('email_verification_token', 128);
-            $table->string('password', 28);
+            $table->string('password', 128);
             $table->string('picture_path', 55);
             $table->string('status', 28)->default('inactive');
             $table->softDeletes();
