@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Students;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\verifyEmail;
 use App\Models\User;
 
 class UserController extends Controller
@@ -46,8 +46,9 @@ class UserController extends Controller
             'email_verification_token' => $request->email.Str::random(55),
             'status' => 'inactive',
         ]);
-
         $accessToken = $user->createToken('authToken')->accessToken;
+
+        $user->notify(new verifyEmail($user));
         return response()->json([
             'data'=>[
                 'user' => $user,
@@ -55,5 +56,32 @@ class UserController extends Controller
             ],
             'message'=>'successfully retrieved'
         ]);
+    }
+
+    public function verifyEmail($token = null){
+
+        if ($token == null){
+            return response()->json([
+                'message'=>'Invalid Token'
+            ]);
+        }
+
+        $user = User::where('email_verification_token', $token)->first();
+        if($user == null){
+            return response()->json([
+                'message'=>'Invalid Token'
+            ]);
+
+        }
+
+        $user->update([
+            'email_verified' => 1,
+            'email_verified_at' => \Carbon\Carbon::now(),
+            'email_verification_token' => '',
+        ]);
+        return response()->json([
+                'message'=>'Your account is activated. You can login now.',
+            ]);
+
     }
 }
