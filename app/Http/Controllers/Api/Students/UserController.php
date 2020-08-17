@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Students;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\verifyEmail;
@@ -58,6 +59,7 @@ class UserController extends Controller
         ]);
         $accessToken = $user->createToken('authToken')->accessToken;
         $user->notify(new verifyEmail($user));
+        unset($user['email_verification_token']);
         return response()->json([
             'data'=>[
                 'user' => $user,
