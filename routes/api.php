@@ -22,3 +22,4 @@ Route::post('/register','Api\Students\UserController@register');
 Route::post('/login','Api\Students\UserController@login');
 
 Route::get('verify/{token}', 'Api\Students\UserController@verifyEmail')->name('verify');
+//user login
