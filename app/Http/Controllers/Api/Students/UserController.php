@@ -29,7 +29,7 @@ class UserController extends Controller
             'advisor_id' => 'required|integer',
             'phone_number' => 'required|max:15|min:11|unique:users',
             'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed',
+            'password' => 'required|min:8|confirmed',
             'image' => 'image|max:2048',
         ]);
         if($validator->fails()){
