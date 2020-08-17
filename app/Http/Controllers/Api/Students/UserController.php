@@ -23,7 +23,8 @@ class UserController extends Controller
             'advisor_id' => 'required|integer',
             'phone_number' => 'required|max:15|min:11|unique:users',
             'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'image' => 'image|max:2048',
         ]);
         if($validator->fails()){
             return response()->json([
@@ -33,6 +34,14 @@ class UserController extends Controller
             ]);
         }
         
+        $image = $request->file('image');
+        $image_path = '';
+        if($image){
+            if($image->isValid()){
+                $image_path = $request->image->storeAs('users', $image->getClientOriginalName());
+            }
+        }
+
         $user = User::create([
             'student_id' => $request->student_id,
             'name' => $request->name,
@@ -41,14 +50,14 @@ class UserController extends Controller
             'semester' => $request->semester,
             'advisor_id' => $request->advisor_id,
             'phone_number' => $request->phone_number,
-            'email' => $request->email,
+            'email' => strtolower(trim($request->email)),
             'password' => bcrypt($request->password),
             'email_verification_token' => $request->email.Str::random(55),
+            'picture_path' => $image_path,
             'status' => 'inactive',
         ]);
         $accessToken = $user->createToken('authToken')->accessToken;
-
-        $user->notify(new verifyEmail($user));
+        //$user->notify(new verifyEmail($user));
         return response()->json([
             'data'=>[
                 'user' => $user,
