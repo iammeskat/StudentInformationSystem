@@ -57,7 +57,7 @@ class UserController extends Controller
             'status' => 'inactive',
         ]);
         $accessToken = $user->createToken('authToken')->accessToken;
-        //$user->notify(new verifyEmail($user));
+        $user->notify(new verifyEmail($user));
         return response()->json([
             'data'=>[
                 'user' => $user,
