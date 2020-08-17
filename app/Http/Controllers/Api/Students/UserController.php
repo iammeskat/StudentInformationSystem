@@ -81,7 +81,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'student_id' => 'required|min:13|max:13',
+            'student_id' => 'required|numeric|digits:13',
             'password' => 'required'
         ]);
         if($validator->fails()){
