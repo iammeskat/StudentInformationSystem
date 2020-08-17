@@ -21,7 +21,7 @@ class UserController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'student_id' => 'required|max:13|max:13|unique:users',
+            'student_id' => 'required|numeric|digits:13|unique:users',
             'name' => 'required|max:55',
             'department' => 'required',
             'batch' => 'required',
