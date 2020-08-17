@@ -19,5 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/register','Api\Students\UserController@register');
+Route::post('/login','Api\Students\UserController@login');
 
 Route::get('verify/{token}', 'Api\Students\UserController@verifyEmail')->name('verify');

@@ -12,11 +12,16 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    /**
+     * User Registration
+     * @return json
+     */
     public function register(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
-            'student_id' => 'required|max:13|unique:users',
+            'student_id' => 'required|max:13|max:13|unique:users',
             'name' => 'required|max:55',
             'department' => 'required',
             'batch' => 'required',
@@ -69,6 +74,58 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * User Login
+     * @return json
+     */
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'student_id' => 'required|min:13|max:13',
+            'password' => 'required'
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'errors'=>$validator->errors()->all(),
+                'data'=>$request->input(),
+                'message'=>'Validation Failed',
+            ]);
+        }
+        $credentials = [
+            'student_id' => $request->student_id,
+            'password' => $request->password,
+        ];
+
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+            if($user->email_verified == 0){
+                auth()->logout();
+                return response()->json(['message' => 'Your account is not activated. Please verify your email.']);
+            }
+            else if($user->status == 'inactive'){
+                auth()->logout();
+                return response()->json(['message' => 'Your account is not activated. Waiting for advisor approval.']);
+            }
+            $accessToken = auth()->user()->createToken('authToken')->accessToken;
+            return response()->json([
+                'data'=>[
+                    'user' => $user,
+                    'access_token' => $accessToken
+                ],
+                'message'=>'successfully retrieved'
+            ]);
+        }
+        return response()->json([
+            'message' => 'Invalid Credentials',
+            'data'=>$request->input(),
+        ]);
+
+    }
+
+    /**
+     * Email Verification
+     * @return json
+     */
     public function verifyEmail($token = null){
 
         if ($token == null){
