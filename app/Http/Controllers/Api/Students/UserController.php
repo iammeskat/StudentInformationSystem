@@ -26,7 +26,7 @@ class UserController extends Controller
             'department' => 'required',
             'batch' => 'required',
             'semester' => 'required',
-            'advisor_id' => 'required|integer',
+            'advisor_id' => 'required|numeric',
             'phone_number' => 'required|max:15|min:11|unique:users',
             'email' => 'email|required|unique:users',
             'password' => 'required|min:8|confirmed',
