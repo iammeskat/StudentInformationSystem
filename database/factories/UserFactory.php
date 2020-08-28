@@ -5,6 +5,7 @@
 use App\Models\Teacher;
 use App\Models\Advisor;
 use App\Models\User;
+use App\Models\Test;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 

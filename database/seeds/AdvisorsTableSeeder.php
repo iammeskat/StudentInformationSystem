@@ -1,8 +1,7 @@
 <?php
 
-use App\Models\Advisor;
 use Illuminate\Database\Seeder;
-
+use App\Models\Advisor;
 class AdvisorsTableSeeder extends Seeder
 {
     /**

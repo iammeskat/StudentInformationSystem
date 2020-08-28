@@ -96,28 +96,29 @@ class UserController extends Controller
             'password' => $request->password,
         ];
 
-        if (auth()->attempt($credentials)) {
-            $user = auth()->user();
-            if($user->email_verified == 0){
-                auth()->logout();
-                return response()->json(['message' => 'Your account is not activated. Please verify your email.']);
-            }
-            else if($user->status == 'inactive'){
-                auth()->logout();
-                return response()->json(['message' => 'Your account is not activated. Waiting for advisor approval.']);
-            }
-            $accessToken = auth()->user()->createToken('authToken')->accessToken;
+        if (!auth()->attempt($credentials)) { 
             return response()->json([
-                'data'=>[
-                    'user' => $user,
-                    'access_token' => $accessToken
-                ],
-                'message'=>'successfully retrieved'
+                'message' => 'Invalid Credentials',
+                'data'=>$request->input(),
             ]);
         }
+        
+        $user = auth()->user();
+        if($user->email_verified == 0){
+            auth()->logout();
+            return response()->json(['message' => 'Your account is not activated. Please verify your email.']);
+        }
+        if($user->status == 'inactive'){
+            auth()->logout();
+            return response()->json(['message' => 'Your account is not activated. Waiting for advisor approval.']);
+        }
+        $accessToken = auth()->user()->createToken('authToken')->accessToken;
         return response()->json([
-            'message' => 'Invalid Credentials',
-            'data'=>$request->input(),
+            'data'=>[
+                'user' => $user,
+                'access_token' => $accessToken
+            ],
+            'message'=>'successfully retrieved'
         ]);
 
     }
