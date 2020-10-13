@@ -15,20 +15,16 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('teacher_id', 13);
             $table->string('name', 55);
             $table->string('department', 55);
-            $table->string('phone_number', 15)->unique();
-            $table->string('email', 55)->unique();
-            $table->tinyInteger('email_verified')->default(0);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('email_verification_token', 128);
-            $table->string('password', 128);
-            $table->string('picture_path', 55);
-            $table->string('status', 28)->default('inactive');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('user_id')
+                    ->references('id')->on('users')
+                    ->onDelete('cascade');
         });
     }
 

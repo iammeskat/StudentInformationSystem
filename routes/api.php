@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/register','Api\Students\UserController@register');
-Route::post('/login','Api\Students\UserController@login');
+Route::post('/register','Api\Users\AuthController@register');
+Route::post('/login','Api\Users\AuthController@login');
 
 Route::get('verify/{token}', 'Api\Students\UserController@verifyEmail')->name('verify');
 //user login

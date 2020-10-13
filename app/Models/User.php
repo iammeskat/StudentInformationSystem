@@ -18,12 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'student_id',
-        'name',
-        'department',
-        'batch',
-        'semester',
-        'advisor_id',
+        'user_type',
         'phone_number',
         'email',
         'email_verified',
@@ -52,8 +47,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function advisor(){
-        return $this->belongsTo(Advisor::class, 'advisor_id');
-    }
+    
 }
  
