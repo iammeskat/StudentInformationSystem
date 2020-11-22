@@ -16,4 +16,9 @@ class Post extends Model
         'content',
         'status',
     ];
+
+
+    public function post_for(){
+        return $this->hasOne('App\Models\PostFor');
+    }
 }

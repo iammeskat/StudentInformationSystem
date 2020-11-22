@@ -36,5 +36,8 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::get('/student/{id}/delete', 'Api\Admins\StudentController@destroy');
 	Route::get('/student/{id}/approve', 'Api\Admins\StudentController@approve');
 
+	Route::get('/posts', 'Api\Admins\PostController@allPost');
+	Route::post('/post/create', 'Api\Admins\PostController@createPost');
+
 });
 //user login
