@@ -126,4 +126,35 @@ class AuthController extends Controller
         ]);
 
     }
+
+    /**
+     * Email Verification
+     * @return json
+     */
+    public function verifyEmail($token = null){
+
+        if ($token == null){
+            return response()->json([
+                'message'=>'Invalid Token'
+            ]);
+        }
+
+        $user = User::where('email_verification_token', $token)->first();
+        if($user == null){
+            return response()->json([
+                'message'=>'Invalid Token'
+            ]);
+
+        }
+
+        $user->update([
+            'email_verified' => 1,
+            'email_verified_at' => \Carbon\Carbon::now(),
+            'email_verification_token' => '',
+        ]);
+        return response()->json([
+                'message'=>'Your account is activated. You can login now.',
+            ]);
+
+    }
 }
