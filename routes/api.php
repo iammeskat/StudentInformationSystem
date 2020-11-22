@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register','Api\Users\AuthController@register');
 Route::post('/login','Api\Users\AuthController@login');
-Route::get('verify/{token}', 'Api\Users\AuthController@verifyEmail')->name('verify');
+Route::get('/verify/{token}', 'Api\Users\AuthController@verifyEmail')->name('verify');
 
 // Admin Panel
 Route::group(['prefix'=>'admin'], function(){
