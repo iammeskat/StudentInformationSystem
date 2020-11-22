@@ -13,6 +13,7 @@ use App\Models\Student;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
 

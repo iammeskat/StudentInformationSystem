@@ -18,6 +18,10 @@ class Student extends Model
     ];
 
     public function advisor(){
-        return $this->belongsTo(Advisor::class, 'advisor_id');
+        return $this->belongsTo('App\Models\Advisor', 'advisor_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 }
