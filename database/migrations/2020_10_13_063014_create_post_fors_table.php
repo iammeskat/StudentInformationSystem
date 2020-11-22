@@ -18,7 +18,7 @@ class CreatePostForsTable extends Migration
             $table->unsignedBigInteger('post_id');
             $table->tinyInteger('all')->default(1);
             $table->tinyInteger('student')->default(0);
-            $table->tinyInteger('semester')->default(0);
+            $table->string('semester')->default(0);
             $table->tinyInteger('teacher')->default(0);
             $table->tinyInteger('cr')->default(0);
             $table->tinyInteger('batch')->default(0);
