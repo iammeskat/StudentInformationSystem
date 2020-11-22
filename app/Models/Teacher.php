@@ -15,6 +15,7 @@ class Teacher extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'teacher_id',
         'name',
         'department',
@@ -45,4 +46,10 @@ class Teacher extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

@@ -22,7 +22,7 @@ class CreatePostForsTable extends Migration
             $table->tinyInteger('teacher')->default(0);
             $table->tinyInteger('cr')->default(0);
             $table->tinyInteger('batch')->default(0);
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->timestamps();
             $table->foreign('post_id')
                     ->references('id')->on('posts')
