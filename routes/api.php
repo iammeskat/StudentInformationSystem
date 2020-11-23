@@ -37,7 +37,11 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::get('/student/{id}/approve', 'Api\Admins\StudentController@approve');
 
 	Route::get('/posts', 'Api\Admins\PostController@allPost');
+	// Route::get('/post/my-post', 'Api\Admins\PostController@myPost');
 	Route::post('/post/create', 'Api\Admins\PostController@createPost');
+	Route::post('/post/{id}/update', 'Api\Admins\PostController@update');
+	Route::get('/post/{id}', 'Api\Admins\PostController@show');
+	Route::get('/post/{id}/delete', 'Api\Admins\PostController@destroy');
 
 });
 //user login

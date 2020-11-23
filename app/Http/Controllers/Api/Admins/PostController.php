@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Post;
 use App\Models\PostFor;
+use App\Models\Admin;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -28,11 +30,23 @@ class PostController extends Controller
      * @return json
      */
     public function myPost(){
-    	$admin_id = 3;   // test
-    	$posts = Post::where('user_id', $admin_id)->with('post_for')->get();
+    	$admin = User::where('user_type', 'admin')->first();   // test
+    	$posts = Post::where('user_id', $admin->id)->with('post_for')->get();
 
     	return response()->json([
     		'data' => $posts,
+    		'error' => 'false',
+    	]);
+    }
+
+    /**
+     * View specific Post
+     * @return json
+     */
+    public function show($id){
+    	$post = Post::with('post_for')->find($id);
+    	return response()->json([
+    		'data' => $post,
     		'error' => 'false',
     	]);
     }
@@ -54,9 +68,9 @@ class PostController extends Controller
             ]);
         }
 
-        $admin_id = 3;
+        $admin = User::where('user_type', 'admin')->first();
         $post = Post::create([
-            'user_id' => $admin_id,		// test
+            'user_id' => $admin->id,		// test
         	'content' => $request->content,
             'status' => '1',
         ]);
@@ -71,6 +85,65 @@ class PostController extends Controller
         return response()->json([
     		'data' => $request->input(),
     		'error' => 'false',
+    	]);
+    }
+
+    /**
+     * Update post
+     * @return json
+     */
+    public function update(Request $request, $id){
+    	$validator = Validator::make($request->all(), [
+            'content' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'message'=>'Validation Failed',
+                'errors'=>$validator->errors()->all(),
+                'data'=>$request->input(),
+            ]);
+        }
+
+        $post = Post::find($id);
+        $post->update([
+        	'content' => $request->content,
+        ]);
+
+        $postFor = PostFor::where('post_id', $post->id);
+        $postFor->update([
+        	'all' => $request->all,
+        	'student' => $request->student,
+        	'teacher' => $request->teacher,
+        ]);
+        return response()->json([
+    		'data' => $request->input(),
+    		'error' => 'false',
+    	]);
+    }
+
+    /**
+     * delete post
+     * @return json
+     */
+    public function destroy($id){
+    	$post = Post::find($id);
+    	if(PostFor::where('post_id', $post->id)->delete()){
+    		if($post->delete()){
+    			return response()->json([
+		    		'data' => $post,
+		    		'error' => 'false',
+		    	]);
+    		}
+    		return response()->json([
+	    		'data' => $post,
+	    		'error' => 'true',
+	    	]);
+    	}
+
+    	return response()->json([
+    		'data' => $post,
+    		'error' => 'true',
     	]);
     }
 }
