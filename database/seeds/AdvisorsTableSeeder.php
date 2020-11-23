@@ -11,6 +11,6 @@ class AdvisorsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Advisor::class, 10)->create();
+        factory(Advisor::class, 8)->create();
     }
 }

@@ -43,5 +43,11 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::get('/post/{id}', 'Api\Admins\PostController@show');
 	Route::get('/post/{id}/delete', 'Api\Admins\PostController@destroy');
 
+	Route::get('/courses', 'api\Admins\CourseController@index');
+	Route::post('/course/create', 'api\Admins\CourseController@create');
+	Route::get('/course/{id}', 'api\Admins\CourseController@show');
+	Route::get('/course/{id}/delete', 'api\Admins\CourseController@destroy');
+	Route::post('/course/{id}/update', 'api\Admins\CourseController@update');
+
 });
-//user login
+//user login 
