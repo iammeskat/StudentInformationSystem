@@ -14,8 +14,8 @@ class ProfileController extends Controller
      * Student profile
      * @return json
      */
-    public function profile(){
-    	$user_id = 3; // access token diye auth theke nite hobe
+    public function profile(Request $request){
+    	$user_id = $request->user()->id;
     	$student = Student::with('user')->where('user_id', $user_id)->first();
     	return response()->json([
     		'data' => $student,
@@ -28,7 +28,7 @@ class ProfileController extends Controller
      * @return json
      */
     public function update(Request $request){
-    	$id = 3; // access token diye auth theke nite hobe
+    	$user_id = $request->user()->id;
 
     	$validator = Validator::make($request->all(), [
             'name' => 'required|max:55',
@@ -58,7 +58,7 @@ class ProfileController extends Controller
         }
 
         
-        $user = User::find($id);
+        $user = User::find($user_id);
         $user->update([
         	'phone_number' => $request->phone_number,
             'email' => strtolower(trim($request->email)),
