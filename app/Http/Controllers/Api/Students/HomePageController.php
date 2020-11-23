@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App\Http\Controllers\Api\Students;
 
 use App\Http\Controllers\Controller;
@@ -15,7 +15,8 @@ class HomePageController extends Controller
 
     	$user_id = $request->user()->id;
     	$student = Student::where('user_id', $user_id)->first();
-    	$posts = PostFor::where('all', 1)
+    	$posts = PostFor::with('post')
+                        ->where('all', 1)
     					->orWhere('student', 1)
     					->orWhere('semester', $student->semester)
     					->orWhere('batch', $student->batch)
