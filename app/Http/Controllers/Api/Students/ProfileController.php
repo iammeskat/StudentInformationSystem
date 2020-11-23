@@ -15,11 +15,11 @@ class ProfileController extends Controller
      * @return json
      */
     public function profile(){
-    	$user_id = 4; // access token diye auth theke nite hobe
+    	$user_id = 3; // access token diye auth theke nite hobe
     	$student = Student::with('user')->where('user_id', $user_id)->first();
     	return response()->json([
     		'data' => $student,
-    		'error' => 'false',
+    		'error' => 'false', 
     	]);
     }
 
@@ -28,7 +28,7 @@ class ProfileController extends Controller
      * @return json
      */
     public function update(Request $request){
-    	$id = 4; // access token diye auth theke nite hobe
+    	$id = 3; // access token diye auth theke nite hobe
 
     	$validator = Validator::make($request->all(), [
             'name' => 'required|max:55',
@@ -57,8 +57,8 @@ class ProfileController extends Controller
             }
         }
 
-        $student = Student::with('user')->find($id);
-        $user = User::find($student->user_id);
+        
+        $user = User::find($id);
         $user->update([
         	'phone_number' => $request->phone_number,
             'email' => strtolower(trim($request->email)),
@@ -66,6 +66,7 @@ class ProfileController extends Controller
             'picture_path' => $image_path,
         ]);
 
+        $student = Student::with('user')->where('user_id', $user_id)->first();
         $student->update([
             'name' => $request->name,
             'batch' => $request->batch,
