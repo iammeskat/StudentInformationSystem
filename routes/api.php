@@ -23,7 +23,7 @@ Route::post('/login','Api\Users\AuthController@login');
 Route::get('verify/{token}', 'Api\Students\AuthController@verifyEmail')->name('verify');
 
 // Admin Panel
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>'auth:api'], function(){
 
 	Route::get('/teachers', 'Api\Admins\TeacherController@index');
 	Route::post('/teacher/create', 'Api\Admins\TeacherController@addTeacher');
@@ -37,7 +37,7 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::get('/student/{id}/approve', 'Api\Admins\StudentController@approve');
 
 	Route::get('/posts', 'Api\Admins\PostController@allPost');
-	// Route::get('/post/my-post', 'Api\Admins\PostController@myPost');
+	Route::get('/post/my-post', 'Api\Admins\PostController@myPost');
 	Route::post('/post/create', 'Api\Admins\PostController@createPost');
 	Route::post('/post/{id}/update', 'Api\Admins\PostController@update');
 	Route::get('/post/{id}', 'Api\Admins\PostController@show');

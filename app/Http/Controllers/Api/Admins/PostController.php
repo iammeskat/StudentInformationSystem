@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Post;
 use App\Models\PostFor;
 use App\Models\Admin;
-use App\Models\User;
+use App\Models\User; 
 
 class PostController extends Controller
 {
@@ -29,9 +29,9 @@ class PostController extends Controller
      * Admins Post
      * @return json
      */
-    public function myPost(){
-    	$admin = User::where('user_type', 'admin')->first();   // test
-    	$posts = Post::where('user_id', $admin->id)->with('post_for')->get();
+    public function myPost(Request $request){
+    	$user_id = $request->user()->id;  // test
+    	$posts = Post::where('user_id', $user_id)->with('post_for')->get();
 
     	return response()->json([
     		'data' => $posts,
@@ -68,9 +68,9 @@ class PostController extends Controller
             ]);
         }
 
-        $admin = User::where('user_type', 'admin')->first();
+        $user_id = $request->user()->id;
         $post = Post::create([
-            'user_id' => $admin->id,		// test
+            'user_id' => $user_id,		// test
         	'content' => $request->content,
             'status' => '1',
         ]);
@@ -83,7 +83,7 @@ class PostController extends Controller
         ]);
 
         return response()->json([
-    		'data' => $request->input(),
+    		'data' => Post::with('post_for')->find($post->id),
     		'error' => 'false',
     	]);
     }
@@ -117,7 +117,7 @@ class PostController extends Controller
         	'teacher' => $request->teacher,
         ]);
         return response()->json([
-    		'data' => $request->input(),
+    		'data' => Post::with('post_for')->find($post->id),
     		'error' => 'false',
     	]);
     }
