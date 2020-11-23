@@ -50,4 +50,12 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::post('/course/{id}/update', 'api\Admins\CourseController@update');
 
 });
-//user login 
+
+// Student Panel
+Route::group(['prefix'=>'student'], function(){
+	Route::get('/', function(){
+		return "Index";
+	});
+	Route::get('/profile', 'api\Students\ProfileController@profile');
+	Route::post('/profile/update', 'api\Students\ProfileController@update');
+});
