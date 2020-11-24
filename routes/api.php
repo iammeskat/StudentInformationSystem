@@ -65,4 +65,9 @@ Route::group(['prefix'=>'student', 'middleware'=>'auth:api'], function(){
 	Route::get('/post/{id}', 'Api\PostController@show');
 	Route::post('/post/{id}/update', 'Api\PostController@update');
 	Route::get('/post/{id}/delete', 'Api\PostController@destroy');
+
+	//Enrollment
+	Route::get('/get-courses', 'Api\Students\EnrollmentController@courses'); //course list
+	Route::post('/enroll', 'Api\Students\EnrollmentController@studentEnroll');
+	Route::get('/my-courses', 'Api\Students\EnrollmentController@myCourses');
 });
