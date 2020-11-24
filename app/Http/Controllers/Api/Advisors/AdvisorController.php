@@ -44,6 +44,7 @@ class AdvisorController extends Controller
     	$enrollRequests = StudentsEnroll::leftjoin('students', 'students.id', 'students_enrolls.student_id')
     									->select('students.id', 'students.user_id', 'students.student_id', 'students.name')
     									->where('advisor_id', $advisor_id)
+    									->where('status', 0)
     									->distinct()
     									->get();
 
