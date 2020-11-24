@@ -112,7 +112,7 @@ class AuthController extends Controller
             auth()->logout();
             return response()->json(['message' => 'Your account is not activated. Please verify your email.']);
         }
-        if($user->status == 'inactive'){
+        if($user->status == '0'){
             auth()->logout();
             return response()->json(['message' => 'Your account is not activated. Waiting for advisor approval.']);
         }
