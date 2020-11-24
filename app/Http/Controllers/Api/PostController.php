@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     /**
      * Posts list
-     * @return json
+     * @return json 
      */
     public function allPost(){
     	$posts = Post::with('post_for')->get();
