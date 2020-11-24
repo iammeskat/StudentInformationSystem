@@ -13,7 +13,7 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
+        $user = User::create([ 
         	'user_type' => 'admin',
         	'phone_number' => '01811111111',
         	'email' => 'admin@sis.com',

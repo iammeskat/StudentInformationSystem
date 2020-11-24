@@ -23,7 +23,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Pending list
+     * Pending list 
      * @return json
      */
     public function pendingList(){

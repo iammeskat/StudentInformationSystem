@@ -11,7 +11,7 @@ class CourseController extends Controller
 {
 	/**
      * Course list
-     * @return json
+     * @return json 
      */
     public function index(){
     	$courses = Courses::all();

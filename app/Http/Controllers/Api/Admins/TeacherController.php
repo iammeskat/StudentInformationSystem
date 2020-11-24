@@ -15,7 +15,7 @@ class TeacherController extends Controller
 {
     /**
      * Teachers list
-     * @return json
+     * @return json 
      */
     public function index(){
     	$data = Teacher::with('user')->get();
