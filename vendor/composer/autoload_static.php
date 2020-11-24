@@ -557,9 +557,14 @@ class ComposerStaticInit6c0a4ebfbbba320e35315122d0808502
     );
 
     public static $classMap = array (
+        'AdminTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdminTableSeeder.php',
         'AdvisorsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdvisorsTableSeeder.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Api\\Admins\\CourseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Admins/CourseController.php',
+        'App\\Http\\Controllers\\Api\\Admins\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Admins/PostController.php',
+        'App\\Http\\Controllers\\Api\\Admins\\StudentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Admins/StudentController.php',
+        'App\\Http\\Controllers\\Api\\Admins\\TeacherController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Admins/TeacherController.php',
         'App\\Http\\Controllers\\Api\\Students\\StudentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Students/StudentController.php',
         'App\\Http\\Controllers\\Api\\Users\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Users/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',

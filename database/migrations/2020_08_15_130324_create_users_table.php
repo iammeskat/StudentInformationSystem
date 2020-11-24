@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('email_verification_token', 128);
             $table->string('password', 128);
             $table->string('picture_path', 55)->nullable();
-            $table->string('status', 28)->default('inactive');;
+            $table->string('status', 28)->default('0');;
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

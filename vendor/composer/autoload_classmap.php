@@ -6,9 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AdminTableSeeder' => $baseDir . '/database/seeds/AdminTableSeeder.php',
     'AdvisorsTableSeeder' => $baseDir . '/database/seeds/AdvisorsTableSeeder.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Api\\Admins\\CourseController' => $baseDir . '/app/Http/Controllers/Api/Admins/CourseController.php',
+    'App\\Http\\Controllers\\Api\\Admins\\PostController' => $baseDir . '/app/Http/Controllers/Api/Admins/PostController.php',
+    'App\\Http\\Controllers\\Api\\Admins\\StudentController' => $baseDir . '/app/Http/Controllers/Api/Admins/StudentController.php',
+    'App\\Http\\Controllers\\Api\\Admins\\TeacherController' => $baseDir . '/app/Http/Controllers/Api/Admins/TeacherController.php',
     'App\\Http\\Controllers\\Api\\Students\\StudentController' => $baseDir . '/app/Http/Controllers/Api/Students/StudentController.php',
     'App\\Http\\Controllers\\Api\\Users\\AuthController' => $baseDir . '/app/Http/Controllers/Api/Users/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',

@@ -17,7 +17,8 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->string('course_code', 8);
             $table->string('name', 64);
-            $table->string('credit', 8);
+            $table->string('semester', 4);
+            $table->string('credit', 4);
             $table->string('type', 8);
             $table->timestamps();
         });

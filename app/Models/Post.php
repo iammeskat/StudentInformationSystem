@@ -16,4 +16,12 @@ class Post extends Model
         'content',
         'status',
     ];
+<<<<<<< HEAD
+=======
+
+
+    public function post_for(){
+        return $this->hasOne('App\Models\PostFor');
+    }
+>>>>>>> admin_panel
 }
