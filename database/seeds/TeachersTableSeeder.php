@@ -11,6 +11,10 @@ class TeachersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Teacher::class, 15)->create();
+        $seed = 10;
+    	while($seed>0){
+    		factory(Teacher::class, 1)->create();
+    		$seed--;
+    	}
     }
 }
