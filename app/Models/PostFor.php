@@ -22,4 +22,9 @@ class PostFor extends Model
         'course_id',
         
     ];
+
+    public function post()
+    {
+        return $this->belongsTo('App\Models\Post');
+    }
 }
