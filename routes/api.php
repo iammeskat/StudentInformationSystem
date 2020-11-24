@@ -70,4 +70,14 @@ Route::group(['prefix'=>'student', 'middleware'=>'auth:api'], function(){
 	Route::get('/get-courses', 'Api\Students\EnrollmentController@courses'); //course list
 	Route::post('/enroll', 'Api\Students\EnrollmentController@studentEnroll');
 	Route::get('/my-courses', 'Api\Students\EnrollmentController@myCourses');
+});
+
+// Advisor Panel
+Route::group(['prefix'=>'advisor', 'middleware'=>'auth:api'], function(){
+	Route::get('/student-list', 'Api\Advisors\AdvisorController@studentList'); // under adviosr
+
+	Route::get('/enroll-requests', 'Api\Advisors\AdvisorController@enrollRequests');
+	Route::get('/enroll-request/{id}/subjects',
+				'Api\Advisors\AdvisorController@requestedSubject'); //id=student.id
+	Route::get('/enroll-request/{id}/approve', 'Api\Advisors\AdvisorController@approve') ;//id=student.id
 }); 
