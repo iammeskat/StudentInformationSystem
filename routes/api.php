@@ -70,4 +70,4 @@ Route::group(['prefix'=>'student', 'middleware'=>'auth:api'], function(){
 	Route::get('/get-courses', 'Api\Students\EnrollmentController@courses'); //course list
 	Route::post('/enroll', 'Api\Students\EnrollmentController@studentEnroll');
 	Route::get('/my-courses', 'Api\Students\EnrollmentController@myCourses');
-});
+}); 
